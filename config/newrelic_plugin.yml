@@ -27,7 +27,7 @@ newrelic:
 #
 agents:
   riak_cs:
-    host: localhost
-    port: 8080
+    host: 's3.amazonaws.com'
+    port: 80
     access_id: 'put_your_cs_access_id_here'
     secret_key: 'put_your_cs_secret_key_here'

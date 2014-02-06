@@ -143,7 +143,8 @@ module RiakCSAgent
       hash_code = Base64.encode64((HMAC::SHA1.new(secret_key) << auth_string).digest).strip
       auth_header = "AWS #{access_id}:#{hash_code}"
 
-      data = RestClient.get "#{cs_host}/#{path}", {
+      RestClient.proxy = ENV["HTTP_PROXY"] unless ENV['HTTP_PROXY'].nil?
+      data = RestClient.get "#{cs_host}#{path}", {
           'Authorization' => auth_header,
           'Content-Type' => 'application/json',
           'Date' => header_date
