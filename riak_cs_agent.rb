@@ -138,8 +138,8 @@ module RiakCSAgent
 
     def riak_cs_get(cs_host, path, access_id, secret_key)
 
-      header_date = Time.now.strftime("%a, %d %B %Y %I:%M:%S EDT")
-      auth_string = "GET\n\napplication/json\n#{header_date}\n/#{path}"
+      header_date = Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S +0000")
+      auth_string = "GET\n\napplication/json\n#{header_date}\n#{path}"
       hash_code = Base64.encode64((HMAC::SHA1.new(secret_key) << auth_string).digest).strip
       auth_header = "AWS #{access_id}:#{hash_code}"
 
